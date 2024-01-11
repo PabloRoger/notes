@@ -18,7 +18,7 @@ class UserService(
 ) {
     fun getAllUser(): List<UserEntity> = userRepository.findAll()
 
-    fun getUserById(userId: UUID) = userRepository.findByUUID(userId) ?: throw UserNotFound(userId)
+    fun getUserById(userId: UUID): UserEntity = userRepository.findByUUID(userId) ?: throw UserNotFound(userId)
 
     fun createUser(userEntity: UserRequestDTO): UserResponseDTO {
         if (userRepository.findByUsername(userEntity.username) != null) {
@@ -32,6 +32,11 @@ class UserService(
             userId = newUser.userId,
             username = newUser.username,
         )
+    }
+
+    fun deleteUser(userId: UUID) {
+        getUserById(userId)
+        return userRepository.deleteById(userId)
     }
 
     fun sendToRabbit(message: String) {
