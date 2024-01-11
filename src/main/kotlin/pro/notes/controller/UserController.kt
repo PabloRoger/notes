@@ -17,11 +17,21 @@ import pro.notes.model.user.UserResponseDTO
 import pro.notes.services.UserService
 import java.util.UUID
 
+/**
+ * Controller Class
+ */
 @RestController
 @RequestMapping("/user-api")
 class UserController(
     val userService: UserService,
 ) {
+    /**
+     * This method call the DB to search all the users
+     * The endpoint use the service method to search
+     *
+     * @see UserService.getAllUser
+     * @return List of UsersDTO for the Response
+     */
     @GetMapping("/users")
     @ResponseStatus(OK)
     fun getAllUsers(): List<UserResponseDTO> {
@@ -36,6 +46,15 @@ class UserController(
         return users
     }
 
+    /**
+     * Figure out if the user exists
+     * The endpoint use the service method to search and specific method to send the data to rabbit as well
+     *
+     * @param userId with UUID type
+     * @see UserService.getUserById(UUID)
+     * @see UserService.sendToRabbit(String)
+     * @return UserEntity with all the data (UUID, Username and password)
+     */
     @GetMapping("/user/{userId}")
     @ResponseStatus(OK)
     fun getUserById(
@@ -47,6 +66,15 @@ class UserController(
         return user
     }
 
+    /**
+     * Create a new user
+     * The endpoint use the service method to search and specific method to send the data to rabbit as well
+     *
+     * @param userEntity is an object with the following parameters: username, password. JSON format
+     * @see UserService.createUser(UserRequestDTO)
+     * @see UserService.sendToRabbit(String)
+     * @return User Response DTO(UUID and Username)
+     */
     @PostMapping("/user")
     @ResponseStatus(CREATED)
     fun createUser(
