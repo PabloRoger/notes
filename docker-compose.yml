@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  postgres-db:
+    image: postgres
+    container_name: 'postgres-db'
+    hostname: postgresql
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: notesdb
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: abc
+    networks:
+      - api_network
+    volumes:
+      - app:/data/db/postgres
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: 'rabbitmq'
+    restart: always
+    networks:
+      - api_network
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+networks:
+  api_network:
+    driver: bridge
+
+volumes:
+  app:
