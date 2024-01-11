@@ -8,21 +8,18 @@ import java.util.UUID
 
 @Entity
 @Table(name = "users")
-class UserEntity (
-
+class UserEntity(
     @Id
     @Column(name = "user_id")
     val userId: UUID = UUID.randomUUID(),
-
     @Column(name = "username")
     var username: String,
-
     @Column(name = "password_hash")
     var password: String,
-
-    )
-
-fun UserEntity.toDTO() = UserDTO(
-    username = this.username,
-    password = this.password
 )
+
+fun UserEntity.toDTO() =
+    UserDTO(
+        username = this.username,
+        password = this.password,
+    )

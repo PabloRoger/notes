@@ -9,31 +9,25 @@ import java.util.UUID
 
 @Entity
 @Table(name = "notes")
-class NotesEntity (
-
+class NotesEntity(
     @Id
     @Column(name = "note_id")
     val noteId: UUID,
-
     @Column(name = "user_id")
     val userId: UUID,
-
     @Column(name = "title")
     var title: String,
-
     @Column(name = "content")
     var content: String,
-
     @Column(name = "creation_date")
-    val creationDate: LocalDate
-){
-
-}
-
-fun NotesEntity.toDTO() = NotesDTO(
-    noteId = this.noteId,
-    userId = this.userId,
-    title = this.title,
-    content = this.content,
-    creationDate = this.creationDate
+    val creationDate: LocalDate,
 )
+
+fun NotesEntity.toDTO() =
+    NotesDTO(
+        noteId = this.noteId,
+        userId = this.userId,
+        title = this.title,
+        content = this.content,
+        creationDate = this.creationDate,
+    )

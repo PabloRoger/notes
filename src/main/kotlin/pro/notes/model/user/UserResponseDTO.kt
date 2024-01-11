@@ -4,5 +4,5 @@ import java.util.UUID
 
 data class UserResponseDTO(
     val userId: UUID?,
-    val username: String
+    val username: String,
 )

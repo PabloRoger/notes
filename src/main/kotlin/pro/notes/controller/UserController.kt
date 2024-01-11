@@ -17,15 +17,15 @@ import pro.notes.services.UserService
 class UserController(
     val userService: UserService,
 ) {
-
     @GetMapping("/users")
     @ResponseStatus(OK)
     fun getAllUsers(): List<UserResponseDTO> {
-        val users = userService
-            .getAllUser()
-            .map {
-                UserResponseDTO(it.userId, it.username)
-            }
+        val users =
+            userService
+                .getAllUser()
+                .map {
+                    UserResponseDTO(it.userId, it.username)
+                }
 
         userService.sendToRabbit("$users")
         return users
@@ -33,9 +33,12 @@ class UserController(
 
     @PostMapping("/user")
     @ResponseStatus(CREATED)
-    fun createUser(@RequestBody userEntity: UserRequestDTO): UserResponseDTO {
-        val newUser = userService
-            .createUser(userEntity)
+    fun createUser(
+        @RequestBody userEntity: UserRequestDTO,
+    ): UserResponseDTO {
+        val newUser =
+            userService
+                .createUser(userEntity)
 
         userService.sendToRabbit("$newUser")
         return newUser

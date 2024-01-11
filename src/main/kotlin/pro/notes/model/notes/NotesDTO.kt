@@ -8,5 +8,5 @@ data class NotesDTO(
     val userId: UUID,
     val title: String,
     val content: String,
-    val creationDate: LocalDate
+    val creationDate: LocalDate,
 )

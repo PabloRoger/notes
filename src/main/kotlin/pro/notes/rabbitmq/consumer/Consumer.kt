@@ -13,11 +13,10 @@ import pro.notes.rabbitmq.Data
 @Component
 @Configuration
 class Consumer {
-
     @RabbitListener(queues = ["\${notes.queue.name}"])
-    fun receive(@Payload message: Data) {
-        println("Received message $message")
-    }
+    fun receive(
+        @Payload message: Data,
+    ) = println("Received message $message")
 
     @Bean
     fun rabbitListenerContainerFactory(connectionFactory: ConnectionFactory): SimpleRabbitListenerContainerFactory {
@@ -29,5 +28,4 @@ class Consumer {
 
     @Bean
     fun messageConverter() = Jackson2JsonMessageConverter()
-
 }

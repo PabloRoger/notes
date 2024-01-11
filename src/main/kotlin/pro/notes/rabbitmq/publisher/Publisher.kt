@@ -7,12 +7,9 @@ import org.springframework.stereotype.Component
 
 @Component
 @EnableRabbit
-class Publisher (
+class Publisher(
     val rabbitTemplate: RabbitTemplate,
-    val queue: Queue
-){
-
-    fun send(message: Any){
-        rabbitTemplate.convertAndSend(queue.name, message)
-    }
+    val queue: Queue,
+) {
+    fun send(message: Any) = rabbitTemplate.convertAndSend(queue.name, message)
 }

@@ -7,12 +7,9 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class PublisherConfig {
-
     @Value("\${notes.queue.name}")
     private lateinit var message: String
 
     @Bean
-    fun queue(): Queue {
-        return Queue(message, true)
-    }
+    fun queue(): Queue = Queue(message, true)
 }

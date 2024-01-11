@@ -1,6 +1,6 @@
 package pro.notes.model.user
 
-data class UserRequestDTO (
+data class UserRequestDTO(
     val username: String,
-    val password: String
+    val password: String,
 )
